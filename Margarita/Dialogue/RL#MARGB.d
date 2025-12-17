@@ -1,9 +1,9 @@
 BEGIN RL#MARGB
 
-IF ~Global("NashkelMinesExit","GLOBAL",1)~ THEN BEGIN NashkelMinesExit
+IF ~Global("RL#NashkelMinesExit","GLOBAL",1)~ THEN BEGIN NashkelMinesExit
 SAY ~So Mulahey is dead. Now what am I supposed to do?~
-IF ~~ THEN REPLY ~I don't understand, why don't you just go on about your way?~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",2)~ GOTO MinesExitBanter1.1
-IF ~~ THEN REPLY ~Explain to me how killing Mulahey affects you at all?~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",2)~ GOTO MinesExitBanter1.2
+IF ~~ THEN REPLY ~I don't understand, why don't you just go on about your way?~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",2)~ GOTO MinesExitBanter1.1
+IF ~~ THEN REPLY ~Explain to me how killing Mulahey affects you at all?~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",2)~ GOTO MinesExitBanter1.2
 END
 
 IF ~~ THEN BEGIN MinesExitBanter1.1
@@ -47,10 +47,10 @@ SAY ~Fine! Staying with you would probably get me killed anyway!~
 IF ~~ DO ~SetGlobal("RL#MARGJoined","LOCALS",0) EscapeArea()~ EXIT
 END
 
-IF ~Global("NashkelMinesExit","GLOBAL",3)~ THEN BEGIN NimbulDeath
+IF ~Global("RL#NashkelMinesExit","GLOBAL",3)~ THEN BEGIN NimbulDeath
 SAY ~Was that an assassin!? Why are you randomly being targeted by assassins, <CHARNAME>?~
-IF ~~ THEN REPLY ~I have yet to find out, but it seems I'm a threat to someone.~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",4) SetGlobal("NimbulDeathvariable","GLOBAL",3)~ GOTO NimbulDeath1.1
-IF ~~ THEN REPLY ~Why? Will this be a problem for you during our travels?~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",4) SetGlobal("NimbulDeathvariable","GLOBAL",3)~ GOTO NimbulDeath1.2
+IF ~~ THEN REPLY ~I have yet to find out, but it seems I'm a threat to someone.~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",4) SetGlobal("NimbulDeathvariable","GLOBAL",3)~ GOTO NimbulDeath1.1
+IF ~~ THEN REPLY ~Why? Will this be a problem for you during our travels?~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",4) SetGlobal("NimbulDeathvariable","GLOBAL",3)~ GOTO NimbulDeath1.2
 END
 
 IF ~~ THEN BEGIN NimbulDeath1.1
@@ -97,10 +97,10 @@ SAY ~Do I look like I know anything useful? You found me stuck in the middle of 
 IF ~~ THEN EXIT
 END
 
-IF ~Global("NashkelMinesExit","GLOBAL",5)~ THEN BEGIN MargaritaOutted
+IF ~Global("RL#NashkelMinesExit","GLOBAL",5)~ THEN BEGIN MargaritaOutted
 SAY ~You can't really believe him, can you <CHARNAME>?~
-IF ~~ THEN REPLY ~I'm having a really hard time believing YOU at the moment, Margarita.~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",6)~ GOTO EnderGone1.1
-IF ~~ THEN REPLY ~I do, actually. The enemy of my enemy is my friend. Besides, he has no reason to lie.~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",6)~ GOTO EnderGone1.2
+IF ~~ THEN REPLY ~I'm having a really hard time believing YOU at the moment, Margarita.~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",6)~ GOTO EnderGone1.1
+IF ~~ THEN REPLY ~I do, actually. The enemy of my enemy is my friend. Besides, he has no reason to lie.~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",6)~ GOTO EnderGone1.2
 IF ~~ THEN REPLY ~Of course I don't. I would never trust a careless thief.~ DO ~SetGlobal("MargaritaBackfire","GLOBAL",1)~ GOTO EnderGone1.10
 END
 
@@ -177,7 +177,7 @@ END
 
 IF ~~ THEN BEGIN ParanoidAttack
 SAY ~What? I am not, nor have I ever been against you, <CHARNAME>! Enough of this!~
-IF ~~ THEN REPLY ~NO! I will see you DEAD, Margarita! I will not be betrayed, and I think it is time for you to die!~ DO ~Enemy()Attack(Player1)~ EXIT
+IF ~~ THEN REPLY ~NO! I will see you DEAD, Margarita! I will not be betrayed, and I think it is time for you to die!~ DO ~Enemy() Attack(Player1)~ EXIT
 IF ~~ THEN REPLY ~You are right. Enough of this, I think you should remove yourself posthaste. I do not indulge liars in my party!~ GOTO FinalFarewell
 END
 
@@ -192,11 +192,11 @@ IF ~~ THEN REPLY ~Then I suppose your "orders" would have included betraying me 
 IF ~~ THEN REPLY ~And what of your "Group"? Was it also part of your orders to have them killed as well?~ GOTO EnderGone1.6
 END
 
-IF ~Global("NashkelMinesExit","GLOBAL",7)~ THEN BEGIN IronThroneArea
+IF ~Global("RL#NashkelMinesExit","GLOBAL",7)~ THEN BEGIN IronThroneArea
 SAY ~Well, here we are, <CHARNAME>. The Iron Throne is just over yonder. Do not worry, I can get us through most of the gaurds without having to draw our blades. I hope you're ready.~
-IF ~~ THEN REPLY ~If we can get through all the gaurds there, why would I need to ready myself? What exactly do we go to face?~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.1
-IF ~~ THEN REPLY ~Yes, I am ready, Margarita. Just lead the way.~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.4
-IF ~~ THEN REPLY ~Do not but in, Halfling. I do not want you to alert anyone to our presence. Let me handle this.~ DO ~SetGlobal("NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.5
+IF ~~ THEN REPLY ~If we can get through all the gaurds there, why would I need to ready myself? What exactly do we go to face?~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.1
+IF ~~ THEN REPLY ~Yes, I am ready, Margarita. Just lead the way.~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.4
+IF ~~ THEN REPLY ~Do not but in, Halfling. I do not want you to alert anyone to our presence. Let me handle this.~ DO ~SetGlobal("RL#NashkelMinesExit","GLOBAL",8)~ GOTO IronThroneArea1.5
 END
 
 IF ~~ THEN BEGIN IronThroneArea1.1
@@ -232,11 +232,12 @@ END
 CHAIN
 IF ~Global("RL#HarpersMargaritaTalk","LOCALS",0)
 InParty("KHALID")
+!StateCheck("KHALID",CD_STATE_NOTVALID)
 InParty("JAHEIRA")
+!StateCheck("JAHEIRA",CD_STATE_NOTVALID)
 InParty("RL#MARG")
-See("RL#MARG")
-!StateCheck("KHALID",STATE_SLEEPING)
-!StateCheck("JAHEIRA",STATE_SLEEPING)~
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#HarperGauge
 ~Ya know, for Harpers, you guys aren't too bad.~ DO ~ SetGlobal("RL#HarpersMargaritaTalk","LOCALS",1)~
 == BJAHEI ~I do not understand, you like Khalid and I, but do not like other Harpers?~
@@ -254,11 +255,12 @@ EXIT
 CHAIN
 IF ~Global("RL#HarpersMargaritaTalk","LOCALS",1)
 InParty("KHALID")
+!StateCheck("KHALID",CD_STATE_NOTVALID)
 InParty("JAHEIRA")
+!StateCheck("JAHEIRA",CD_STATE_NOTVALID)
 InParty("RL#MARG")
-See("RL#MARG")
-!StateCheck("KHALID",STATE_SLEEPING)
-!StateCheck("JAHEIRA",STATE_SLEEPING)~
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BKHALI RL#HarperHarpy
 ~M-Margarita d-d-dear, w-why do you not tell anyone of some of your past? I-it would be a pleasure to hear it.~ DO ~SetGlobal("RL#HarpersMargaritaTalk","LOCALS",2)~
 == RL#MARGB ~I'm surprised that harpy of a wife even let you speak to me, after our last conversation.~
@@ -269,11 +271,12 @@ EXIT
 CHAIN
 IF ~Global("RL#HarpersMargaritaTalk","LOCALS",2)
 InParty("KHALID")
+!StateCheck("KHALID",CD_STATE_NOTVALID)
 InParty("JAHEIRA")
+!StateCheck("JAHEIRA",CD_STATE_NOTVALID)
 InParty("RL#MARG")
-See("RL#MARG")
-!StateCheck("KHALID",STATE_SLEEPING)
-!StateCheck("JAHEIRA",STATE_SLEEPING)~
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#HarperRetribution
 ~Khalid?~ DO ~SetGlobal("RL#HarpersMargaritaTalk","LOCALS",3)~
 == BKHALI ~Y-yes Margarita?~
@@ -297,11 +300,12 @@ EXIT
 CHAIN
 IF ~Global("RL#HarpersMargaritaTalk","LOCALS",3)
 InParty("KHALID")
+!StateCheck("KHALID",CD_STATE_NOTVALID)
 InParty("JAHEIRA")
+!StateCheck("JAHEIRA",CD_STATE_NOTVALID)
 InParty("RL#MARG")
-See("RL#MARG")
-!StateCheck("KHALID",STATE_SLEEPING)
-!StateCheck("JAHEIRA",STATE_SLEEPING)~
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#Harperflirting
 ~Hi Khalid.~ DO ~SetGlobal("RL#HarpersMargaritaTalk","LOCALS",4)~
 == BKHALI ~Hello there, M-Margarita, how does this day f-find you?~
@@ -323,9 +327,10 @@ EXIT
 CHAIN
 IF ~Global("RL#KivanMargaritaTalk","LOCALS",0)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KIVAN")
-See("RL#MARG")
-!StateCheck("KIVAN",STATE_SLEEPING)~
+!StateCheck("KIVAN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BKIVAN RL#RangerSpeak
 ~I find it odd that a halfling such as yourself calls yourself a Ranger, Margarita.~ DO ~SetGlobal("RL#KivanMargaritaTalk","LOCALS",1)~
 == RL#MARGB ~Is it because I'm short or because I'm not trying to avenge some dead wife of mine?~
@@ -337,9 +342,10 @@ EXIT
 CHAIN
 IF ~GlobalGT("Chapter","GLOBAL",3)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KIVAN")
+!StateCheck("KIVAN",CD_STATE_NOTVALID)
 See("RL#MARG")
-!StateCheck("KIVAN",STATE_SLEEPING)
 Global("RL#KivanMargaritaTalk","LOCALS",1)~
 THEN BKIVAN RL#RangerAmend
 ~I think I shall watch you more closely, deceiver. <CHARNAME> still allows you to travel with us, but I disagree with <HISHER> choice.~ DO ~SetGlobal("RL#KivanMargarita","LOCALS",2)~
@@ -353,9 +359,10 @@ EXIT
 CHAIN
 IF ~Global("RL#KivanMargaritaTalk","LOCALS",2)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KIVAN")
-See("RL#MARG")
-!StateCheck("KIVAN",STATE_SLEEPING)~
+!StateCheck("KIVAN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#RangerDislike
 ~Hey, Mr. Broken. I don't like you.~ DO ~SetGlobal("RL#KivanMargaritaTalk","LOCALS",3)~
 == BKIVAN ~That matters not to me, Deceiver.~
@@ -367,9 +374,10 @@ EXIT
 CHAIN
 IF ~Global("RL#ViconiaMargaritaTalk","LOCALS",0)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("VICONIA")
-See("RL#MARG")
-!StateCheck("VICONIA",STATE_SLEEPING)~
+!StateCheck("VICONIA",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#DrowAttentions
 ~Um... You... I mean... we... we um... they didn't... does...?~ DO ~SetGlobal("RL#ViconiaMargaritaTalk","LOCALS",1)~
 == BVICON ~Either you are addled, or you speak in tongues I do not understand. Can you perchance speak Common?~
@@ -380,9 +388,10 @@ EXIT
 CHAIN
 IF ~Global("RL#ViconiaMargaritaTalk","LOCALS",1)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("VICONIA")
-See("RL#MARG")
-!StateCheck("VICONIA",STATE_SLEEPING)~
+!StateCheck("VICONIA",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#ScaredOfDrow
 ~I'm so sorry about the last time I spoke. I think I just wasn't used to seeing Drow.~ DO ~SetGlobal("RL#ViconiaMargaritaTalk","LOCALS",2)~
 == BVICON ~I figured that out, small female. I am no danger to you. As of yet.~
@@ -397,9 +406,10 @@ EXIT
 CHAIN
 IF ~Global("RL#ViconiaMargaritaTalk","LOCALS",2)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("VICONIA")
+!StateCheck("VICONIA",CD_STATE_NOTVALID)
 See("RL#MARG")
-!StateCheck("VICONIA",STATE_SLEEPING)
 GlobalGT("Chapter","GLOBAL",3)~
 THEN BVICON RL#DrowKnowledge
 ~You have proven to be quite the little scoundrel, Margarita. You had even me fooled.~ DO ~SetGlobal("RL#ViconiaMargaritaTalk","LOCALS",3)~
@@ -413,9 +423,10 @@ EXIT
 CHAIN
 IF ~Global("RL#ViconiaMargaritaTalk","LOCALS",3)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("VICONIA")
-See("RL#MARG")
-!StateCheck("VICONIA",STATE_SLEEPING)~
+!StateCheck("VICONIA",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BVICON RL#WhyAfraid
 ~Why do you fear me, Halfling? I have done nothing to you to warrant such an emotion.~ DO ~SetGlobal("RL#ViconiaMargaritaTalk","LOCALS",4)~
 = ~I must admit, that is not easy to do.~
@@ -432,9 +443,10 @@ EXIT
 CHAIN
 IF ~Global("RL#KagainMargaritaTalk","LOCALS",0)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KAGAIN")
-See("RL#MARG")
-!StateCheck("KAGAIN",STATE_SLEEPING)~
+!StateCheck("KAGAIN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BKAGAI RL#KagainUnderstanding
 ~I like how you work, Margarita.~ DO ~SetGlobal("RL#KagainMargaritaTalk","LOCALS",1)~
 == RL#MARGB ~I don't understand, what do you know about how I work?~
@@ -446,9 +458,10 @@ EXIT
 CHAIN
 IF ~Global("RL#KagainMargaritaTalk","LOCALS",1)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KAGAIN")
-See("RL#MARG")
-!StateCheck("KAGAIN",STATE_SLEEPING)~
+!StateCheck("KAGAIN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BKAGAI RL#KagainInterest
 ~Margarita, I think you should look into working for a different employer.~ DO ~SetGlobal("RL#KagainMargaritaTalk","LOCALS",2)~
 == RL#MARGB ~And why is that?~
@@ -463,9 +476,10 @@ EXIT
 CHAIN
 IF ~Global("RL#KagainMargaritaTalk","LOCALS",2)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("KAGAIN")
-See("RL#MARG")
-!StateCheck("KAGAIN",STATE_SLEEPING)~
+!StateCheck("KAGAIN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BKAGAI RL#KagainWantsDate
 ~I think we should go get an ale sometime.~ DO ~SetGlobal("RL#KagainMargaritaTalk","LOCALS",3)~
 == RL#MARGB ~Are you asking me what I think you're asking me?~
@@ -480,9 +494,10 @@ EXIT
 CHAIN
 IF ~Global("RL#XanMargaritaTalk","LOCALS",0)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("XAN")
-See("RL#MARG")
-!StateCheck("XAN",STATE_SLEEPING)~
+!StateCheck("XAN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN RL#MARGB RL#XanUnliked
 ~You're probably more useless than a fat trapeze artist~ DO ~SetGlobal("RL#XanMargaritaTalk","LOCALS",1)~
 == BXANNN ~Trying to goad me into a verbal altercation is a useless endeavor. It might be best for you to abandon it.~
@@ -497,9 +512,10 @@ EXIT
 CHAIN
 IF ~Global("RL#XanMargaritaTalk","LOCALS",1)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("XAN")
-See("RL#MARG")
-!StateCheck("XAN",STATE_SLEEPING)~
+!StateCheck("XAN",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BXANNN RL#XanDismissed
 ~Margarita, have you ever thought perhaps your mission is a waste of your time?~ DO ~SetGlobal("RL#XanMargaritaTalk","LOCALS",2)~
 == RL#MARGB ~I think it's a waste of YOUR time to even address me, Mr. Useless. Go away.~
@@ -509,11 +525,13 @@ EXIT
 
 CHAIN
 IF ~Global("RL#TiaxMargaritaTalk","LOCALS",0)
-InParty("TIAX")
-InParty("XAN")
 InParty("RL#MARG")
-See("RL#MARG")
-!StateCheck("TIAX",STATE_SLEEPING)~
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
+InParty("XAN")
+!StateCheck("XAN",CD_STATE_NOTVALID)
+InParty("TIAX")
+!StateCheck("TIAX",CD_STATE_NOTVALID)
+See("RL#MARG")~
 THEN BTIAX RL#TiaxCrazyness
 ~Tiax will rule all!~ DO ~SetGlobal("RL#TiaxMargaritaTalk","LOCALS",1)~
 == RL#MARGB ~Have you ever thought of who your underlings will be when you rule all?~
@@ -534,13 +552,14 @@ EXIT
 CHAIN
 IF ~Global("RL#SpecialDialogue","LOCALS",0)
 InParty("RL#MARG")
+!StateCheck("RL#MARG",CD_STATE_NOTVALID)
 InParty("EDWIN")
+!StateCheck("EDWIN",CD_STATE_NOTVALID)
 InParty("VICONIA")
+!StateCheck("VICONIA",CD_STATE_NOTVALID)
 InParty("SHARTEEL")
+!StateCheck("SHARTEEL",CD_STATE_NOTVALID)
 See("RL#MARG")
-!StateCheck("EDWIN",STATE_SLEEPING)
-!StateCheck("SHARTEEL",STATE_SLEEPING)
-!StateCheck("VICONIA",STATE_SLEEPING)
 Global("Chapter","GLOBAL",4)~
 THEN RL#MARGB RL#SpecialDialogue1
 ~I think a powerful mage should looked on with care. You never know if they'll go crazy!~ DO ~SetGlobal("RL#SpecialDialogue","LOCALS",1)~

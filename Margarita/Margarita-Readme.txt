@@ -71,3 +71,9 @@ Version History:
 
 -March 8, 2013 - Version 1.0
 	Initial Release
+
+- January, 2026 - Version 1.1
+	Traification
+	EET compatibility
+	Label
+	WeiduModPackager

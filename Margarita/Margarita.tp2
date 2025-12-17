@@ -1,6 +1,65 @@
 BACKUP ~Margarita/backup~
 AUTHOR ~Xavioria (rlbecker11@yahoo.com)~
+
+VERSION ~1.1~
+
+ALWAYS
+
+	ACTION_IF GAME_IS ~bgt~ BEGIN
+		INCLUDE ~Margarita/Lib/g3_bgt_cpmvars.tpa~
+		PRINT ~Game is BGT~
+	END ELSE ACTION_IF GAME_IS ~eet~ BEGIN
+		INCLUDE ~eet/other/cpmvars/eet_cpmvars.tpa~
+		PRINT ~Game is EET~
+	END ELSE ACTION_IF GAME_IS ~bg1 totsc bgee~ BEGIN
+		INCLUDE ~Margarita/Lib/g3_bgt_cpmvars.tpa~
+		PRINT ~Game is BG1~
+	END
+
+
+	DEFINE_ACTION_FUNCTION autotra_workaround BEGIN
+	COPY ~Margarita/Languages/English~				~weidu_external/Margarita/Languages/autotra/%LANGUAGE%~
+	COPY ~Margarita/Languages/%LANGUAGE%~				~weidu_external/Margarita/Languages/autotra/%LANGUAGE%~
+	END
+
+	LAF autotra_workaround END
+
+	ACTION_IF GAME_IS ~bgee eet~ BEGIN
+//  ACTION_DEFINE_ARRAY RL#_noconvert BEGIN END
+
+		ACTION_DEFINE_ARRAY RL#_reload BEGIN Setup END
+
+			LAF HANDLE_CHARSETS
+				INT_VAR
+				infer_charsets = 1
+				STR_VAR
+				tra_path = EVAL ~weidu_external/Margarita/Languages/autotra~
+				out_path = EVAL ~weidu_external/Margarita/Languages/autotra/UTF8~
+				iconv_path = ~Margarita/Languages/autotra/iconv~
+				// noconvert_array = RL#_noconvert
+				reload_array = RL#_reload
+			END
+
+	// Backup ANSI
+	COPY ~weidu_external/Margarita/Languages/autotra/%LANGUAGE%~			~weidu_external/Margarita/Languages/autotra/ANSI/%LANGUAGE%~
+	// UTF8 only
+	COPY ~weidu_external/Margarita/Languages/autotra/UTF8/%LANGUAGE%~			~weidu_external/Margarita/Languages/autotra/%LANGUAGE%~
+	END
+
+
+END // ALWAYS
+
+AUTO_TRA ~weidu_external/Margarita/Languages/autotra/%s~
+
+LANGUAGE
+		~English~
+		~English~
+		~Margarita/Languages/English/Setup.tra~
+
 BEGIN ~Margarita for Baldur's Gate: Enhanced Edition~
+DESIGNATED 0
+LABEL ~Margarita-Xavioria~
+REQUIRE_PREDICATE GAME_IS ~bg1 totsc bgee eet bgt~ ~This mod need BG1, BGEE, BGT or EET~
 
 // This adds Margarita herself to the game
 
@@ -14,7 +73,7 @@ SAY BIO ~When asked about her past, MARGARITA becomes defensive and fidgety. She
 
 // Dialogue Scripts
 
-COMPILE ~Margarita/Scripts/RL#MARG.baf~
+COMPILE ~Margarita/Scripts/RL#MARG.baf~ EVALUATE_BUFFER
 
 // These lines are for Margarita's Dialogs
 
@@ -24,13 +83,43 @@ COMPILE ~Margarita/Dialogue/RL#MARGB.d~
 
 // Margarita shall appear here
 
-EXTEND_TOP ~AR5403.bcs~ ~Margarita/Scripts/AR5403.baf~
+EXTEND_TOP ~%NashkelMines_L3_BCS%.bcs~ ~Margarita/Scripts/AR5403.baf~ EVALUATE_BUFFER
 
 // Margarita's Scripts
 
 APPEND ~pdialog.2da~
-~RL#MARG RL#MARGP RL#MARGJ RL#MARGD RL#MARG25P RL#MARG25J RL#MARG25D RL#MARG25~
-UNLESS ~RL#MARG~
+~RL#MARG RL#MARG RL#MARGJ RL#MARGD RL#MARG25P RL#MARG25J RL#MARG25D RL#MARG25~ UNLESS ~RL#MARG~
 APPEND ~interdia.2da~
-~RL#MARG RL#MARGB RL#MARGB25~
-UNLESS ~RL#MARG~
+~RL#MARG RL#MARGB RL#MARGB25~ UNLESS ~RL#MARG~
+
+/* ------------- *
+ *  Fate Spirit  *
+ * ------------- */
+ 
+ACTION_IF  GAME_IS ~eet~ BEGIN
+	INCLUDE ~EET/other/EET_functions.tph~   // functions from EET mod
+	LAF ~EET_NPC_TRANSITION~
+		INT_VAR
+			type = 1						// NPC is summon-able if met before
+			default_ToB = 1					//controls if NPC should be spawnable in ToB when the game has been started in ToB (no by default - 0)
+			// clean_ToB = 1				//cleans out existing EET code in FATESP.DLG, AR4000.BCS, AR4500.BCS for DV specified in clean_ToB_DV
+		STR_VAR
+			dv = "RL#MARG"					// death variable of your NPC (must be the same in BG1/SoD/BG2/ToB)
+			override_BG1 = "RL#MARG"		//name of the override NPC script in BG1
+			// override_SoD = ""		//name of the override NPC script in SoD (use BG1 one if doesn't exist)
+			// override_SoA = ""		// override script of your NPC (SoA)
+			// override_ToB = ""		// override script of your NPC (ToB) //name of the override NPC script in ToB (use SoA one if doesn't exist)
+			// dialog_ToB = ""		// joining dialogue for ToB//name of the dialogue file used after spawning NPC in ToB (use SoA POST dialogue or initial SoA dialogue file if doesn't exist)
+			cre_ToB = "RL#MARG"			//if type = 4 and/or default_ToB = 1 name of the ToB CRE file is needed (used to create new CRE rather than migrating existing one from SoA)
+//			traFile = EVAL "weidu_external/sbs/languages/autotra/%s/setup.tra"  //an optional TRA file that will be used for the TRA references defined in "string"
+			string = "~Bring me Margarita, the halfling stalker.~"					//FATESP summon text (example: "Bring me Quayle, the gnome cleric/illusionist.") or TRA string number
+			stringPosDV = "Mazzy"			//set the DV of NPC right below your response (used for sorting FATESP responses alphabetically)
+											//Aerie, Ajantis, Alora, Anomen, Baeloth, Branwen, Cernd, Coran, Corwin, Dorn, Dynaheir, Edwin, Eldoth, Faldorn, Garrick,
+											//Glint, HaerDalis, Hexxat, Imoen2, Jaheira, Jan, Kagain, Keldorn, Khalid, Kivan, Korgan, MKhiin, Mazzy, Minsc, Montaron,
+											//Nalia, Neera, Quayle, Rasaad, Safana, SharTeel, Skie, Tiax, Valygar, Viconia, Voghiln, Wilson, Xan, Xzar, Yeslick, Yoshimo
+											//variable not set (default) = NPC name appended at the end of summoning list
+			// SummonedVar = ""				//set it only if you want to use different var name than %dv%Summoned (useless in most cases)
+			// SpawnPlaneVar = ""			//set it only if you want use different var name than %dv%SpawnPlane (useless in most cases)
+			// clean_ToB_DV = "BHAALSPW"			//if clean_ToB = 1 existing code for this DV will be removed from FATESP.DLG, AR4000.BCS, AR4500.BCS
+	END
+END

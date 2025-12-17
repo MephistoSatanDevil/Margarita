@@ -1,87 +1,112 @@
 IF
-InParty(Myself)
-See(Player1)
-AreaCheck("AR5000")
-CombatCounter(0)
-!See([ENEMY])
-Global("Chapter","GLOBAL",3)
-Global("NashkelMinesExit","GLOBAL",0)
+	InParty(Myself)
+//	See(Player1)
+	AreaCheck("%ValleyoftheTombs%")
+//	ActionListEmpty()
+//	!ActuallyInCombat()
+//	!See([ENEMY])
+	Global("Chapter","GLOBAL",3)
+	Global("RL#NashkelMinesExit","GLOBAL",0)
 THEN
-RESPONSE #100
-SetGlobal("NashkelMinesExit","GLOBAL",1)
+	RESPONSE #100
+		SetGlobal("RL#NashkelMinesExit","GLOBAL",1)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-AreaCheck("AR5400")
-CombatCounter(0)
-!See([ENEMY])
-Global("Chapter","GLOBAL",3)
-Global("NashkelMinesExit","GLOBAL",0)
+	InParty(Myself)
+//	See(Player1)
+	AreaCheck("%NashkelMines%")
+//	ActionListEmpty()
+//	!ActuallyInCombat()
+//	!See([ENEMY])
+	Global("Chapter","GLOBAL",3)
+	Global("RL#NashkelMinesExit","GLOBAL",0)
 THEN
-RESPONSE #100
-SetGlobal("NashkelMinesExit","GLOBAL",1)
+	RESPONSE #100
+		SetGlobal("RL#NashkelMinesExit","GLOBAL",1)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-Global("NashkelMinesExit","GLOBAL",1)
+	ActionListEmpty()
+	!ActuallyInCombat()
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	Global("RL#NashkelMinesExit","GLOBAL",1)
 THEN
-RESPONSE #100
-Interact(Player1)
+	RESPONSE #100
+		Interact(Player1)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-AreaCheck("AR4800")
-CombatCounter(0)
-!See([ENEMY])
-Global("NashkelMinesExit","GLOBAL",2)
-Global("NimbulDeathvariable","GLOBAL",1)
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	AreaCheck("%Nashkel%")
+	ActionListEmpty()
+	!ActuallyInCombat()
+	!See([ENEMY])
+	Global("RL#NashkelMinesExit","GLOBAL",2)
+	Global("NimbulDeathvariable","GLOBAL",1)
 THEN
-RESPONSE #100
-SetGlobal("NashkelMinesExit","GLOBAL",3)
-SetGlobal("NimbulDeathvariable","GLOBAL",2)
+	RESPONSE #100
+		SetGlobal("RL#NashkelMinesExit","GLOBAL",3)
+		SetGlobal("NimbulDeathvariable","GLOBAL",2)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-Global("NashkelMinesExit","GLOBAL",3)
-Global("NimbulDeathvariable","GLOBAL",2)
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	ActionListEmpty()
+	!ActuallyInCombat()
+	Global("RL#NashkelMinesExit","GLOBAL",3)
+	Global("NimbulDeathvariable","GLOBAL",2)
 THEN
-RESPONSE #100
-Interact(Player1)
+	RESPONSE #100
+		Interact(Player1)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-Global("NashkelMinesExit","GLOBAL",5)
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	ActionListEmpty()
+	!ActuallyInCombat()
+	Global("RL#NashkelMinesExit","GLOBAL",5)
 THEN
-RESPONSE #100
-Interact(Player1)
+	RESPONSE #100
+		Interact(Player1)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-AreaCheck("AR1200")
-GlobalLT("MargaritaBackfire","GLOBAL",1)
-Global("NashkelMinesExit","GLOBAL",6)
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	ActionListEmpty()
+	!ActuallyInCombat()
+	AreaCheck("%BaldursGateDocks%")
+	GlobalLT("MargaritaBackfire","GLOBAL",1)
+	Global("RL#NashkelMinesExit","GLOBAL",6)
 THEN
-RESPONSE #100
-SetGlobal("NashkelMinesExit","GLOBAL",7)
+	RESPONSE #100
+		SetGlobal("RL#NashkelMinesExit","GLOBAL",7)
 END
 
 IF
-InParty(Myself)
-See(Player1)
-Global("NashkelMinesExit","GLOBAL",7)
+	InParty(Myself)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	ActionListEmpty()
+	!ActuallyInCombat()
+	Global("RL#NashkelMinesExit","GLOBAL",7)
 THEN
-RESPONSE #100
-Interact(Player1)
+	RESPONSE #100
+		Interact(Player1)
 END
